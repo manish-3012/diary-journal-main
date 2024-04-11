@@ -1,0 +1,32 @@
+<!-- views/confirmation.ejs -->
+
+<%- include("partials/header"); -%>
+<header class="masthead" style="background-image: url('/assets/img/maa_charan.webp')">
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<main class="mb-4">
+    <div id="englishContent">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <h1 class="mb-3">Registration Successful!</h1>
+                    <p class="fs-4 fw-bold">Your registration number is:<span class="text-success fw-bold"> <%= urn %></span> </p>
+                    <p class="fs-5 text-warning mb-0 fw-bold">Please note down this Registration Number or take a screenshot of this page! 📸</p>
+                    <p class="fs-5 text-warning mt-2 fw-bold hindi">कृपया इस रजिस्ट्रेशन नंबर को नोट करें या इस पृष्ठ का स्क्रीनशॉट लें! 📸</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</html>

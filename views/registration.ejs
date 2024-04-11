@@ -1,0 +1,337 @@
+<!-- registration.ejs -->
+
+<%- include("partials/header"); -%>
+    <header class="masthead" style="background-image: url('/assets/img/maa_charan.webp')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>Registration</h1>
+                        <!-- <span class="subheading">Let's jot something down today...</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-6 justify-content-center">
+                <div class="col-md-12 col-lg-12 col-xl-10">
+                    <p class="text-center mt-0 mb-2 fw-bold">🪷 Jai Shri Mataji! 🪷</p>
+                    <form action="/registration" method="post">
+                        <div class="form-group">
+                            <label for="registrationDuration">Select Registration Duration:</label>
+                            <select class="form-control" name="registrationDuration" id="registrationDuration" required>
+                                <option value="threedaysseminar">Three Days Seminar & Puja Registration</option>
+                                <option value="onedaypuja">One Day Puja Registration</option>
+                                <option value="filledPrice">Already Paid</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="registrationType">Registration Type:</label>
+                            <select class="form-control" name="registrationType" id="registrationType" required>
+                                <option value="indian">Indian</option>
+                                <option value="foreigner">Foreigner</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="numAdults" class="">Number of Adults:</label>
+                            <input class="col-md-2" type="number" class="form-control" name="numAdults" id="numAdults"
+                                value="<%= numAdults %>" min="0">
+                        </div>
+
+                        <!-- Adult Details -->
+                        <div id="adultDetails">
+                            <!-- Rows for adults will be added here dynamically -->
+                        </div>
+
+                        <!-- Number of Yuvas -->
+                        <div class="form-group">
+                            <label for="numYuvas">Number of Yuvas:</label>
+                            <input class="col-md-2" type="number" class="form-control" name="numYuvas" id="numYuvas"
+                                value="<%= numYuvas %>" min="0">
+                        </div>
+
+                        <!-- Yuva Details -->
+                        <div id="yuvaDetails">
+                            <!-- Rows for yuvas will be added here dynamically -->
+                        </div>
+
+                        <!-- Number of Children -->
+                        <div class="form-group">
+                            <label for="numBals">Number of Bal Shaktis:</label>
+                            <input class="col-md-2" type="number" class="form-control" name="numBals" id="numBals"
+                                value="<%= numBals %>" min="0">
+                        </div>
+
+                        <!-- Child Details -->
+                        <div id="balDetails">
+                            <!-- Rows for children will be added here dynamically -->
+                        </div>
+
+                        <hr>
+                        <h3>Payer's Details</h3>
+                        <!-- Payer's Details -->
+                        <div id="payerDetails" class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="payerFirstName">Name:<span class="text-danger fw-bold">*</span></label>
+                                <input type="text" class="form-control" name="payerFirstName" id="payerFirstName"
+                                    required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="payerEmail">Email:</label>
+                                <input type="text" class="form-control" name="payerEmail" id="payerEmail">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="payerMobile">Mobile No.:<span class="text-danger fw-bold">*</span></label>
+                                <input type="text" class="form-control" name="payerMobile" id="payerMobile" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="payerDistrict">District:<span class="text-danger fw-bold">*</span></label>
+                                <input type="text" class="form-control" name="payerDistrict" id="payerDistrict"
+                                    required>
+                            </div>
+                            <% const indianStates=["Andhra Pradesh", "Arunachal Pradesh" , "Assam" , "Bihar"
+                                , "Chhattisgarh" , "Goa" , "Gujarat" , "Haryana" , "Himachal Pradesh" , "Jharkhand"
+                                , "Karnataka" , "Kerala" , "Madhya Pradesh" , "Maharashtra" , "Manipur" , "Meghalaya"
+                                , "Mizoram" , "Nagaland" , "Odisha" , "Punjab" , "Rajasthan" , "Sikkim" , "Tamil Nadu"
+                                , "Telangana" , "Tripura" , "Uttar Pradesh" , "Uttarakhand" , "West Bengal"
+                                , "Andaman and Nicobar Islands" , "Chandigarh" , "Dadra and Nagar Haveli"
+                                , "Daman and Diu" , "Lakshadweep" , "Delhi" , "Puducherry" , "Others" ]; %>
+
+                                <div class="form-group col-md-4">
+                                    <label for="payerState">State:<span class="text-danger fw-bold">*</span></label>
+                                    <select class="form-control" name="payerState" id="payerState" required>
+                                        <option value="" disabled selected>Select State</option>
+                                        <% indianStates.forEach(state=> { %>
+                                            <option value="<%= state %>">
+                                                <%= state %>
+                                            </option>
+                                            <% }); %>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="payerPAN">AADHAAR/Passport:<span
+                                            class="text-danger fw-bold">*</span></label>
+                                    <input type="text" class="form-control" name="payerPAN" id="payerPAN" required>
+                                </div>
+                                <!-- <div class="form-group col-md-4">
+                            <label for="payerAADHAAR">AADHAAR No.:</label>
+                            <input type="text" class="form-control" name="payerAADHAAR" id="payerAADHAAR" required>
+                        </div> -->
+                        </div>
+
+                        <p id="totalAmount" class="fw-bold fs-3 mt-2 mb-0"></p>
+                        <input type="hidden" name="totalAmount" id="totalAmountInput" value="<%= totalAmount %>">
+                        <hr>
+                        <!-- Section for Seminar Dedication Amount -->
+                        <div class="mt-3 mb-2">
+                            <h3 class="text-center">Payment Methods</h3>
+                            <p class="mt-2 fs-5 text-success fw-bold mb-2">Please make the payment using either of the
+                                two available methods.</p>
+                            <p class="mt-2 fs-5 text-success hindi fw-bold mb-2">कृपया उपलब्ध दो तरीकों में से किसी एक
+                                का उपयोग करके भुगतान करें।</p>
+                            <p class="text-center mb-2 mt-0">══━━━━✥◈✥━━━━══</p>
+                            <h3 class="text-center">1️⃣ QR Code</h3>
+                            <img class="col-md-6 rounded mx-auto d-block" src="/assets/img/qr.png">
+                            <hr>
+                            <h3 class="text-center mt-3 mb-0">2️⃣ Bank Details</h3>
+                            <p class="fw-bold mb-0">A/C Name: H H Shri Mataji Nirmala Devi
+                                Sahaja Yoga Trust<br>
+                                Account Number : 102010100218672 <br>
+                                Bank: AXIS BANK<br>
+                                IFSC Code : UTIB0000102<br>
+                            </p>
+                            <!-- <p>The amount can be transferred through RTGS and NEFT. Please insert UTR Number after payment, to complete the registration process.</p>
+                                <p>आरटीजीएस और एनईएफटी के माध्यम से राशि स्थानांतरित की जा सकती है। पंजीकरण प्रक्रिया को पूरा करने के लिए कृपया भुगतान के बाद UTR नंबर डालें।</p> -->
+                            <!-- <p >🔴NOTE: - Take screenshot after the payment is complete.</p>
+                                    <p>🔴नोट: - भुगतान पूरा होने के बाद स्क्रीनशॉट लें।</p> -->
+                            <p class=" mt-0 text-center">══━━━━✥◈✥━━━━══</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="utrNumber" class="fw-bold">UTR Number/UPI Transaction ID:<span
+                                    class="text-danger fw-bold">*</span></label>
+                            <input type="text" class="form-control" name="utrNumber" id="utrNumber" required>
+                            <p class="mt-0 mb-3 fs-6">(In case of <span class="fw-bold">multiple numbers</span>, use
+                                <span class="fw-bolder hindi">' , '</span> to separate them.<br>For example: <span
+                                    class="fw-bold">573647863481, rohan@oksbi, 3678478582834, Paid to person name</span>
+                                )
+                            </p>
+                            <p class="mt-0 mb-2 hindi fs-6">(यदि कई संख्याएँ हैं, तो उन्हें <span class="fw-bold">' ,
+                                    '</span> से अलग करें।<br>उदाहरण के लिए: <span class="fw-bold">573647863481,
+                                    rohan@oksbi, 3678478582834, Paid to person name</span> )</p>
+                        </div>
+                        <hr>
+                        <h3 class="text-center">Transportation Facility</h3>
+                        <p class="text-justify mt-0 mb-2 fs-6 #ffff" style="color:darkred;">In case if you require
+                            transportation facility from <span class="fw-bold">Bengaluru Railway Station and Bus
+                                station, Airport to Puja Venue</span>, please inform us of your arrival.</p>
+                        <p class="text-justify mt-0 hindi fs-6">
+                            अगर आप <span class="fw-bold">बेंगलुरु से पूजा स्थल के लिए</span> के लिए परिवहन सुविधा का
+                            उपयोग करना चाहते हैं तो कृपया अपने आगमन की जानकारी हमें प्रदान करें।</p>
+                        <!-- Arrival Date and Time -->
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="arrivalDate" class="fw-bold">Arrival Date:</label>
+                                <input type="date" class="form-control" name="arrivalDate" id="arrivalDate">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="arrivalTime" class="fw-bold">Arrival Time:</label>
+                                <input type="time" class="form-control" name="arrivalTime" id="arrivalTime">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="arrivalLocation" class="fw-bold">Arrival Location:</label>
+                                <select class="form-control" name="arrivalLocation" id="arrivalLocation">
+                                    <option value="" disabled selected>Select Arrival Location</option>
+                                    <option value="KSR Bengaluru Railway Station">KSR Bengaluru Railway Station</option>
+                                    <option value="Yeshwanthpur Bengaluru Railway Station">Yeshwanthpur Bengaluru
+                                        Railway Station</option>
+                                    <option value="Bengaluru Bus Station">Bengaluru Bus Station</option>
+                                    <option value="Bengaluru Airport">Bengaluru Airport</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- <h3 class="fw-bold fs-5 text-center text-success mb-3">Please bring a print out of the transaction as a payment proof!</h3> -->
+                        <button type="submit"
+                            class="btn btn-success custom-btn  rounded mx-auto d-block">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            function addRows(category, count) {
+                for (let i = 1; i <= count; i++) {
+                    let rowHtml = `
+                    <div class="form-row">
+                        <div class="form-group col-md-3">
+                            <label for="${category}Name${i}">${category.charAt(0).toUpperCase() + category.slice(1)} ${i} Name:<span class="text-danger fw-bold">*</span></label>
+                            <input type="text" class="form-control" name="${category}Name${i}" id="${category}Name${i}" required>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="${category}Address${i}">${category.charAt(0).toUpperCase() + category.slice(1)} ${i} Address:<span class="text-danger fw-bold">*</span></label>
+                            <input type="text" class="form-control" name="${category}Address${i}" id="${category}Address${i}" required>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="${category}Gender${i}">${category.charAt(0).toUpperCase() + category.slice(1)} ${i} Gender:<span class="text-danger fw-bold">*</span></label>
+                            <select class="form-control" name="${category}Gender${i}" id="${category}Gender${i}" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <!-- Add other gender options as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="${category}seniorCitizen${i}">${category.charAt(0).toUpperCase() + category.slice(1)} ${i} Senior Citizen:<span class="text-danger fw-bold">*</span></label>
+                            <select class="form-control" name="${category}seniorCitizen${i}" id="${category}seniorCitizen${i}" required>
+                                <option value="no">No</option>
+                                <option value="yes">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+                    $(`#${category}Details`).append(rowHtml);
+                }
+            }
+
+            $("#numAdults").on("change", function () {
+                const count = parseInt($(this).val(), 10);
+                $("#adultDetails").empty();
+                addRows("adult", count);
+            });
+
+            $("#numYuvas").on("change", function () {
+                const count = parseInt($(this).val(), 10);
+                $("#yuvaDetails").empty();
+                addRows("yuva", count);
+            });
+
+            $("#numBals").on("change", function () {
+                const count = parseInt($(this).val(), 10);
+                $("#balDetails").empty();
+                addRows("bal", count);
+            });
+
+            function calculateTotalAmount() {
+                const nonForeignerPrices = {
+                    adult: 2450,
+                    yuva: 1850,
+                    bal: 950
+                };
+
+                const filledPrices = {
+                    adult: 2450,
+                    yuva: 1850,
+                    bal: 950
+                };
+
+                const foreignerPrices = {
+                    adult: 2450,
+                    yuva: 1850,
+                    bal: 950
+                };
+
+                const oneDayPujaPrices = {
+                    adult: 850,
+                    yuva: 850,
+                    bal: 450
+                };
+
+                const registrationType = $("#registrationType").val();
+                const registrationDuration = $("#registrationDuration").val();
+                let prices;
+
+                if (registrationDuration === "filledPrice") {
+                    prices = filledPrices;
+                } else if (registrationDuration === "threedaysseminar") {
+                    if (registrationType === "foreigner") {
+                        prices = foreignerPrices;
+                    } else {
+                        prices = nonForeignerPrices;
+                    }
+                } else {
+                    if (registrationType === "foreigner") {
+                        prices = foreignerPrices;
+                    } else {
+                        prices = oneDayPujaPrices;
+                    }
+                }
+
+                const numAdults = parseInt($("#numAdults").val(), 10) || 0;
+                const numYuvas = parseInt($("#numYuvas").val(), 10) || 0;
+                const numBals = parseInt($("#numBals").val(), 10) || 0;
+
+                // Calculate total amount
+                const totalAmount = (numAdults * prices.adult) + (numYuvas * prices.yuva) + (numBals * prices.bal);
+
+                // Display total amount in the form or update the UI as needed
+                $("#totalAmount").text(`Total Amount to be paid: ₹${totalAmount} `);
+
+                // Set the value of the hidden input
+                $("#totalAmountInput").val(totalAmount);
+
+                // Enable or disable the submit button based on totalAmount
+                $("button[type='submit']").prop("disabled", !(totalAmount > 0));
+            }
+
+            // Disable submit button on page load
+            $("button[type='submit']").prop("disabled", true);
+
+            calculateTotalAmount();
+
+            // Add event listeners for number inputs
+            $("#numAdults, #numYuvas, #numBals, #registrationType, #registrationDuration").on("change", calculateTotalAmount);
+
+        });
+    </script>
+    <%- include("partials/footer"); -%>

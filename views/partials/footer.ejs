@@ -1,0 +1,60 @@
+<footer >
+  <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+              <div class="small text-center text-muted "><a class="text-muted" href="privacy">Privacy Policy</a><br>Made with ❣️ by Param Chaitanya 🪷</div>
+          </div>
+      </div>
+  </div>
+</footer>
+<!-- Bootstrap core JS-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Add this in your HTML file -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Core theme JS-->
+<script src="js/scripts.js"></script>
+
+<!-- Include this script in your HTML files -->
+<script>
+    function toggleLanguage(language) {
+        const englishContent = document.querySelector('#englishContent');
+        const hindiContent = document.querySelector('#hindiContent');
+  
+        const englishToggle = document.querySelector('.language-toggle[data-language="en"]');
+        const hindiToggle = document.querySelector('.language-toggle[data-language="hi"]');
+  
+        if (language === 'en') {
+            englishContent.style.display = 'block';
+            hindiContent.style.display = 'none';
+            englishToggle.classList.add('selected');
+            hindiToggle.classList.remove('selected');
+        } else if (language === 'hi') {
+            englishContent.style.display = 'none';
+            hindiContent.style.display = 'block';
+            englishToggle.classList.remove('selected');
+            hindiToggle.classList.add('selected');
+        }
+  
+        // Store the selected language in local storage
+        localStorage.setItem('selectedLanguage', language);
+    }
+  
+    // Retrieve the selected language from local storage
+    const storedLanguage = localStorage.getItem('selectedLanguage') || 'en';
+    
+    // Initial setup to show the stored language content
+    toggleLanguage(storedLanguage);
+  
+    // Event listener for language toggle
+    document.querySelectorAll('.language-toggle').forEach((toggle) => {
+        toggle.addEventListener('click', (event) => {
+            const selectedLanguage = event.target.dataset.language;
+            toggleLanguage(selectedLanguage);
+        });
+    });
+</script>
+
+  
+</body>
+</html>

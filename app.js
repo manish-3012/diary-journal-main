@@ -78,7 +78,7 @@ import('emailjs').then((emailjsModule) => {
       const message = {
         from: 'Registration Team <bangaloreadigurupuja@gmail.com>',
         to: `${userName} <${userEmail}>`,
-        cc: 'else <3pattitude@gmail.com>',
+        cc: 'else <sykarpujaseminar@gmail.com>',
         subject: 'Registration Confirmation - Shri AdiGuru Puja Bengaluru 2024',
         attachment: [
           { data: `<html>

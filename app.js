@@ -186,7 +186,7 @@ import('emailjs').then((emailjsModule) => {
       const adultName = req.body[`adultName${i}`];
       const adultAddress = req.body[`adultAddress${i}`];
       const adultGender = req.body[`adultGender${i}`];
-      const seniorCitizen = req.body[`seniorCitizen${i}`];
+      const seniorCitizen = req.body[`adultSeniorCitizen${i}`];
 
       syDetails.push({ name: adultName, address: adultAddress, gender: adultGender, mobile: req.body.payerMobile, category: "A", urn:urn });
       adultDetails.push({ name: adultName, address: adultAddress, gender: adultGender, seniorCitizen:seniorCitizen  });
